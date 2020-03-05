@@ -20,7 +20,6 @@ use amethyst::{
     utils::application_root_dir,
 };
 
-
 struct GameState;
 
 fn main() -> amethyst::Result<()> 
@@ -29,6 +28,7 @@ fn main() -> amethyst::Result<()>
     let assets_dir = app_root.join("assets");
     let display_config = assets_dir.join("config/display.ron");
 
+    
     let game_data = GameDataBuilder::default()
         .with_bundle(TransformBundle::new())?
         .with_bundle(
@@ -39,8 +39,9 @@ fn main() -> amethyst::Result<()>
                 )
                 .with_plugin(RenderFlat2D::default()),
     )?;
+    
 
-    let mut game = Application::new(assets_dir, GameState, GameDataBuilder::default())?;
+    let mut game = Application::new(assets_dir, GameState, game_data)?;
     game.run();
     Ok(())
 }
@@ -75,9 +76,10 @@ impl SimpleState for GameState {
         }
     }
 
+    /*
     fn update(&mut self, _: &mut StateData<'_, GameData<'_, '_>>) -> SimpleTrans 
     {
         println!("Computing some more whoop-ass...");
         Trans::Quit
-    }
+    }*/
 }
